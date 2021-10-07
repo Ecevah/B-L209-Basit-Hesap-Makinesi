@@ -1,63 +1,91 @@
-<!DOCTYPE html>
-  <html>
-    <body>
-      <form name="toplam">
-      <label>İlk Sayı : </label>
-      <input type="text" id="sayi1"><br><br>
-      <label>ikinci sayı : </label>
-      <input type="text" id="sayi2"><br><br>
-      <input type="radio" name="islem" value="Topla" id="topla"> Topla
-      <input type="radio" name="islem" value="Çıkar" id="cikar"> Çıkar
-      <input type="radio" name="islem" value="Çarp" id="carp"> Çarp
-      <input type="radio" name="islem" value="Böl" id="bol"> Böl <br>
-      <input type="button" id="btnHesap" value="HESAPLA">
-      </form>
-      <br>
-      <div id="kutuToplam"></div>
- 
-      <script>
- 
-      func  tion Topla(s1,s2){
-      return s1+s2;
+<html>
+  <head>
+  <title>BİL209 - WEB TABANLI PROGRAMLAMAYA GİRİŞ ÖDEV 1</title>
+  <meta name="auther" content= "Ahmet Ecevit 200601074">
+  <meta charset="UTF-8">
+  <style>
+      body {
+        background: #f8f7f7;
+        text-align: center;
+      }
+
+      button {
+        border: 1px solid #000;
+      }
+      #main {
+      width: 250px;
+      margin: 0 auto;
+      }
+      #arkaPlan {
+        background: #2c3e50;
+        width: 100%;
+        height: 150px;
+        overflow: hidden;
+      }
+      #girdiler {
+        width: 250px;
+        height: 50px;
+        background: #95a5a6;
+        float: left;
+        margin : 50 !import;
+      }      
+  </style>
+	  <script type="text/javascript">
+    	function sadeceSayi(evt) 
+      {
+    		var charCode = (evt.which) ? evt.which : event.keyCode;
+    		if (charCode > 31 && (charCode < 48 || charCode > 57))
+        	return false;
+    		return true;
+			}
+			function topla()
+			{  
+      	s1=document.getElementById("txbBirincisayi").value;     
+				s2=document.getElementById("txbİkincisayi").value;
+				txbSonuc.value=parseInt(s1)+parseInt(s2); 
+      }
+				function cikar()
+        {  
+        	s1=document.getElementById("txbBirincisayi").value;  
+					s2=document.getElementById("txbİkincisayi").value;
+					txbSonuc.value=parseInt(s1)-parseInt(s2);
         }
-      function Fark(s1,s2){
-        return s1-s2;
-       }
-      function Carp(s1,s2){
-        return s1*s2;
-      }
-      function Bol(s1,s2){
-        return s1/s2;
-      }
- 
- 
-      var btn=document.getElementById("btnHesap");
-      btn.onclick=function(){
-      var s1=Number(document.getElementById("sayi1").value);
-      var s2=Number(document.getElementById("sayi2").value);
-      var sonuc;
-      if(document.getElementById("topla").checked)
-      {
-         sonuc=Topla(s1,s2);
-      }
-      else if(document.getElementById("cikar").checked)
-      {
-         sonuc=Fark(s1,s2);
-      }
-       else if(document.getElementById("carp").checked)
-      {
-         sonuc=Carp(s1,s2);
-      }
-      else if(document.getElementById("bol").checked)
-      {
-        sonuc=Bol(s1,s2);
-      }
-      else
-      {
-       sonuc="Lütfen Bir İşlem Türü Seçiniz..."
-      }
-      document.getElementById("kutuToplam").innerHTML="Sonuç : "+sonuc;
-      }
-      </script>
-    </body> 
-</html>
+				function carp()
+        {  
+        	s1=document.getElementById("txbBirincisayi").value;  
+					s2=document.getElementById("txbİkincisayi").value;
+					txbSonuc.value=parseInt(s1)*parseInt(s2);
+        }
+				function  bol()
+        {  
+        	s1=document.getElementById("txbBirincisayi").value;   
+					s2=document.getElementById("txbİkincisayi").value; 
+          if(s2==0) 
+						alert("Hata: Bölen Sayı Sıfır Olamaz Başka bir Değer Giriniz") 
+					else txbSonuc.value=parseInt(s1)/parseInt(s2);
+        }
+    </script>
+    </head>
+    <body>
+	    <div id="main">
+      <h2>Hesap Makinesi</h2>
+	    <div id="arkaPlan">
+      <div id="girdiler">
+      <input  type="text" placeholder="Birinci Sayı" onkeypress="return sadeceSayi(event)" id="txbBirincisayi" > <br>
+      </div>
+      <div id="girdiler">
+	    <input  type="text" placeholder="Iikinci Sayı" onkeypress="return sadeceSayi(event)" id="txbİkincisayi" ><br>
+      </div>
+      
+      <input type="button"  id="buttonadd" value="+" onclick="topla()">
+	    <input type="button"  id="buttonasub" value="-" onclick=" cikar()">
+	    <input type="button"  id="buttonamul" value="*" onclick="carp()">
+	    <input type="button"  id="buttondiv" value="/" onclick="bol()"><br>
+	    
+      <div id="girdiler">
+      <input  type="text" placeholder="Sonuç" readonly="" id="txbSonuc" > <br>
+      </div>
+    </div>
+    </div>
+    </body>
+    </html>
